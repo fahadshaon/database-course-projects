@@ -6,8 +6,6 @@ As some critical accepts of production environment, like connection pool, proper
 
 ## Run
 
-This project is managed with [Apache Maven](http://maven.apache.org/). 
-
 To compile 
 
     mvn compile 
@@ -20,10 +18,7 @@ To execute -
 
     mvn exec:java -Dexec.mainClass="class-path-to-main"
 
-Here, `class-path-to-main` is fully qualified class path to a class containing to `public static void main(String []args)` method.
-For example, `edu.utd.dspl.InitialExample`, `edu.utd.dspl.tasks.PreparedStatementExample`, `edu.utd.dspl.tasks.TransactionExample`. 
-
-In addition, this project can be directly executed from any modern IDE like Intellij IDEA, Eclipse, Netbeans, etc.   
+Here, `class-path-to-main` is fully qualified class path to a class containing to `public static void main(String []args)` method. For example, `edu.utd.dspl.InitialExample`, `edu.utd.dspl.tasks.PreparedStatementExample`, `edu.utd.dspl.tasks.TransactionExample`. 
 
 ## Reference 
 
