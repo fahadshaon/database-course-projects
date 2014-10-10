@@ -1,0 +1,33 @@
+# Intellij Idea project files
+
+*.iml
+*.ipr
+*.iws
+.idea/
+
+#
+# Linux
+#
+# Ignore "backup" files which vim and emacs commonly create
+*~
+
+#
+# OS X
+#
+
+*.DS_Store
+
+
+# Maven 
+
+target/
+*.class
+*.jar 
+*.war
+
+tomcat.properties
+jdbc.properties
+
+slide/
+notes.txt
+
