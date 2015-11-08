@@ -16,9 +16,15 @@ To clean and compile
 
 To execute - 
 
-    mvn exec:java -Dexec.mainClass="class-path-to-main"
+    mvn exec:java -Dexec.cleanupDaemonThreads=false -Dexec.mainClass="class-path-to-main"  
 
-Here, `class-path-to-main` is fully qualified class path to a class containing to `public static void main(String []args)` method. For example, `edu.utd.dspl.InitialExample`, `edu.utd.dspl.tasks.PreparedStatementExample`, `edu.utd.dspl.tasks.TransactionExample`. 
+Here, `class-path-to-main` is fully qualified class path to a class containing to `public static void main(String []args)` method.  
+For example -  
+
+    mvn exec:java -Dexec.cleanupDaemonThreads=false -Dexec.mainClass="edu.utd.dspl.InitialExample"  
+    mvn exec:java -Dexec.cleanupDaemonThreads=false -Dexec.mainClass="edu.utd.dspl.tasks.PreparedStatementExample"  
+    mvn exec:java -Dexec.cleanupDaemonThreads=false -Dexec.mainClass="edu.utd.dspl.tasks.TransactionExample"  
+
 
 ## Reference 
 
