@@ -17,5 +17,5 @@ To clean and compile
 
 To execute - 
 
-    mvn exec:java -Dexec.mainClass="edu.utd.dspl.tasks.Main"
+    mvn exec:java -Dexec.cleanupDaemonThreads=false -Dexec.mainClass="edu.utd.dspl.tasks.Main"
 
