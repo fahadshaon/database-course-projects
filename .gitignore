@@ -18,11 +18,11 @@
 *.DS_Store
 
 
-# Maven 
+# Maven
 
 target/
 *.class
-*.jar 
+*.jar
 *.war
 
 tomcat.properties
@@ -31,3 +31,9 @@ jdbc.properties
 slide/
 notes.txt
 
+
+# Gradle
+
+.gradle/
+build/
+out/

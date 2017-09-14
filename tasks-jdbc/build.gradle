@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group = 'edu.utd.dspl'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    mysqlConnectorVersion = '5.1.32'
+}
+
+dependencies {
+    compile "mysql:mysql-connector-java:${mysqlConnectorVersion}"
+}
+
+mainClassName = System.getProperty("mainClass") ?: 'edu.utd.dspl.InitialExample'
+
+run {
+    standardInput = System.in
+}
