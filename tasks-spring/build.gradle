@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group = 'edu.utd.dspl'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    springVersion = '4.1.0.RELEASE'
+    mysqlConnectorVersion = '5.1.32'
+    commonsDbcp2Version = '2.0.1'
+}
+
+dependencies {
+    compile "org.springframework:spring-core:${springVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "mysql:mysql-connector-java:${mysqlConnectorVersion}"
+    compile "org.apache.commons:commons-dbcp2:${commonsDbcp2Version}"
+}
+
+mainClassName = System.getProperty("mainClass") ?: 'edu.utd.dspl.tasks.Main'
+
+run {
+    standardInput = System.in
+}

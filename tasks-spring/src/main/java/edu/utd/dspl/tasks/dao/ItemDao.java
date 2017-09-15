@@ -45,6 +45,6 @@ public class ItemDao {
             throw new RuntimeException("Item type must be 0 or 1");
         }
 
-        jdbcTemplate.update(QUERY_UPDATE_ITEM_STATUS, new Integer[]{itemType, itemId, taskId});
+        jdbcTemplate.update(QUERY_UPDATE_ITEM_STATUS, new Object[]{itemType, itemId, taskId});
     }
 }

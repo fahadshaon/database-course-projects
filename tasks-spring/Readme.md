@@ -1,21 +1,20 @@
-# Tasks Spring 
+# Tasks Spring
 
 An example spring application managing tasks done for CS6360: Database Design class.
- 
+
 ## Run
 
 First make a copy of `src/main/resources/jdbc-sample.properties` to `src/main/resources/jdbc.properties`
-and fill up four attributes. Then, 
+and fill up the four attributes. Then,
 
-To compile 
+To build
 
-    mvn compile 
+    gradle build
 
-To clean and compile 
+To clean and build
 
-    mvn clean compile
+    gradle clean build
 
-To execute - 
+To execute
 
-    mvn exec:java -Dexec.cleanupDaemonThreads=false -Dexec.mainClass="edu.utd.dspl.tasks.Main"
-
+    gradle run -q --console plain
