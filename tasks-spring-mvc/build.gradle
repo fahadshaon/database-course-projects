@@ -1,0 +1,68 @@
+apply plugin: 'java'
+apply plugin: 'org.akhikhl.gretty'
+
+group = 'edu.utd.dspl'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    springVersion = '4.1.0.RELEASE'
+    mysqlConnectorVersion = '5.1.32'
+    commonsDbcp2Version = '2.0.1'
+
+    servletApiVersion = '2.5'
+    jstlVersion = '1.2'
+
+    sitemeshVersion = '2.4.2'
+    validationApiVersion = '1.1.0.Final'
+}
+
+dependencies {
+    compile "org.springframework:spring-core:${springVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile "org.springframework:spring-webmvc:${springVersion}"
+    compile "mysql:mysql-connector-java:${mysqlConnectorVersion}"
+    compile "org.apache.commons:commons-dbcp2:${commonsDbcp2Version}"
+
+    compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
+    compile "javax.servlet.jsp.jstl:jstl:${jstlVersion}"
+
+    compile "opensymphony:sitemesh:${sitemeshVersion}"
+    compile "javax.validation:validation-api:${validationApiVersion}"
+}
+
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    ext {
+        grettyVersion = '1.2.4'
+    }
+
+    dependencies {
+        classpath "org.akhikhl.gretty:gretty:${grettyVersion}"
+    }
+}
+
+gretty {
+    def userPort = System.getProperty("port")
+    port = userPort && userPort.isInteger() ? Integer.parseInt(userPort) : 8002
+
+    contextPath = 'tasks-spring-mvc'
+    servletContainer = 'jetty9'
+}
+
