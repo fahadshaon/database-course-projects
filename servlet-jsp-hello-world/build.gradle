@@ -1,0 +1,52 @@
+apply plugin: 'java'
+apply plugin: 'org.akhikhl.gretty'
+
+group = 'edu.utd.dspl'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+}
+
+ext {
+    servletApiVersion = '2.5'
+    jstlVersion = '1.2'
+}
+
+
+dependencies {
+    compile "javax.servlet:javax.servlet-api:${servletApiVersion}"
+    compile "javax.servlet.jsp.jstl:jstl:${jstlVersion}"
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    ext {
+        grettyVersion = '1.2.4'
+    }
+
+    dependencies {
+        classpath "org.akhikhl.gretty:gretty:${grettyVersion}"
+    }
+}
+
+gretty {
+    def userPort = System.getProperty("port")
+    port = userPort && userPort.isInteger() ? Integer.parseInt(userPort) : 8001
+
+    contextPath = 'servlet-jsp-hello-world'
+    servletContainer = 'jetty9'
+}
+

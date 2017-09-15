@@ -1,21 +1,18 @@
-# Servlet JSP Hello World 
+# Servlet JSP Hello World
 
 An example java web application containing example Servlet and JSP.
 
 ## Deploy
 
+To clean and compile
 
-To clean and compile 
+    gradle clean build
 
-    mvn clean compile 
-    
-To deploy the web application in Tomcat-7.x. Setup and run the tomcat as described in
-top level readme file and run
+Run the web application with Jetty server
 
-    mvn tomcat7:deploy
- 
-After a successful deploy you should be able to view the web application at 
-<http://localhost:8080/servlet-jsp-hello-world/>.
-(Assuming tomcat is running in `localhost` at `8080` port.
-Change host and port as necessary.)
+    gradle appRun
 
+To access the running application visit <http://localhost:8001/servlet-jsp-hello-world>.
+To run the application on a different port, e.g. `8080`.
+
+    gradle appRun -Dport=8080
