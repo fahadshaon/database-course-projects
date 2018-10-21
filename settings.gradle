@@ -1,0 +1,6 @@
+rootProject.name = 'db-projects'
+
+include 'tasks-jdbc'
+include 'tasks-spring'
+include 'servlet-jsp-hello-world'
+include 'tasks-spring-mvc'

@@ -15,9 +15,15 @@ Relevant presentation at <http://www.shaon.org/slides/mvc-and-spring.html>
 
 - [Gradle](https://gradle.org/), project management and build tool
 
-## Installing Gradle
+The project comes with gradle-wrapper script, which can be used instead of installing gradle.
+Just replace `gradle` with `../gradlew` in the instructions
+
+## Install Gradle
 
 There are several ways to install gradle in an operating system.
+
+### Manually installing gradle
+
 In general the process is *download*, *extract* and *setup environment variable*.
 
 - Download tar/zip file from <https://gradle.org/releases/>
@@ -25,6 +31,25 @@ In general the process is *download*, *extract* and *setup environment variable*
 - Add the `bin` directory to environment variable.
 
 More at - <https://gradle.org/install/>
+
+### SDKMan
+
+sdkman <https://sdkman.io/>. Install sdkman
+
+    curl -s "https://get.sdkman.io" | bash
+
+Add it in one of the profile files like `.bashrc`.
+
+    source /opt/intel/sgxsdk/environment
+
+Now you can install most of java related tools easily like -
+
+    sdk install gradle
+
+In fact, sdkman can be used to install Java itself.
+
+    sdk install java 8.0.191-oracle
+
 
 ## Database settings
 
