@@ -1,6 +1,16 @@
 # Task Spring MVC
 
 An example spring mvc application managing tasks done for CS6360: Database Design class.
+This is a standard [Spring Boot](https://spring.io/projects/spring-boot) application,
+which is exactly structured like guides from <https://spring.io/guides>. 
+Feel free to experiment with other guides.
+
+## Download JavaScript dependencies 
+
+We use `bower` <https://bower.io> to download dependencies
+
+    cd src/main/resources/static
+    bower install
 
 ## Deploy
 
@@ -8,15 +18,17 @@ To clean and compile
 
     gradle clean build
 
-Run the web application with Jetty server
+Run the web application 
 
-    gradle appRun
+    gradle bootRun 
+    
+Or 
 
-To access the running application visit <http://localhost:8002/tasks-spring-mvc>.
-To run the application on a different port, e.g. `8080`.
+    java -jar build/libs/tasks-sring-mvc-0.0.1.jar
 
-    gradle appRun -Dport=8080
-
+The application can be accessed at <http://localhost:8080/> 
+Note: in case of servlet deployment we built an war file and deployed with `contextPath`. 
+Here spring boot is solo application deployed at ROOT context, so no addition.  
 
 ## Possible improvements
 

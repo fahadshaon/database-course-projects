@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{index.html :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Tasks App - Delete task confirmation</title>
+</head>
+
+<body>
+<section>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            <div class="alert alert-warning text-center" th:if="${task == null}">
+                Task not found
+            </div>
+
+            <div class="well" th:if="${task != null}">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Delete task</h5>
+                        <p class="card-text">
+
+                            Delete task "<em th:text="${task.title}"></em>" and all related items?
+                            This action can not be reverted.
+
+                        </p>
+
+                        <form class="form-inline" method="post" th:object="${task}"
+                              th:action="@{/task/delete(task_id=${task.id})}">
+
+                            <input type="hidden" th:field="*{id}"/>
+                            <input type="hidden" name="confirm_delete" value="1">
+
+                            <a class="btn btn-outline-secondary" href="/task/"
+                               th:href="@{/task/detail(task_id=${task.id})}" role="button" style="margin-right: 10px">
+                                Cancel
+                            </a>
+
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa fa-trash"></i> Delete
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

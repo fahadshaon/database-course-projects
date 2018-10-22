@@ -1,13 +1,12 @@
 package edu.utd.dspl.tasks.controller;
 
-import edu.utd.dspl.tasks.dao.TaskDao;
 import edu.utd.dspl.tasks.domain.Task;
-import edu.utd.dspl.tasks.utils.TaskValidator;
+import edu.utd.dspl.tasks.repository.TaskRepository;
+import edu.utd.dspl.tasks.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,72 +19,61 @@ import javax.validation.Valid;
 public class TasksController {
 
     @Autowired
-    private TaskDao taskDao;
+    private TaskService taskService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping({"/", ""})
     public String list(ModelMap model) {
-        model.addAttribute("tasks", taskDao.getTasks());
-        return "tasks_list";
+        model.addAttribute("tasks", taskService.findAll());
+
+        return "task/list";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.GET)
-    public String save(@RequestParam(value = "task_id", defaultValue = "") Integer taskId, ModelMap model) {
+    @GetMapping(value = "/save")
+    public String save(@RequestParam(value = "task_id", defaultValue = "") Long taskId, ModelMap model) {
 
         Task task;
+
         if (taskId == null) {
             task = new Task();
         } else {
-            task = taskDao.getTaskById(taskId);
+            task = taskService.findOrFail(taskId);
         }
 
         model.addAttribute("task", task);
 
-        return "task_save";
+        return "task/save";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String edit(@Valid @ModelAttribute("task") Task task,
-                       BindingResult bindingResult, ModelMap model) {
+    @PostMapping(value = "/save")
+    public String edit(@Valid @ModelAttribute("task") Task task, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "task_save";
+            return "task/save";
         }
 
-        if (task.getTaskId() == null) {
-            taskDao.insert(task);
-        } else {
-            taskDao.update(task);
-        }
-
-        return "redirect:/t/task/detail?task_id=" + task.getTaskId();
+        task = taskService.save(task);
+        return "redirect:/task/detail?task_id=" + task.getId();
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
-    public String delete(@RequestParam(value = "task_id") Integer taskId, ModelMap model) {
+    @GetMapping(value = "/delete")
+    public String delete(@RequestParam(value = "task_id") Long taskId, ModelMap model) {
 
-        Task task = taskDao.getTaskById(taskId);
+        Task task = taskService.findOrFail(taskId);
         model.addAttribute("task", task);
 
-        return "task_delete";
+        return "task/delete";
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String delete(@ModelAttribute("task") Task task,
-                         @RequestParam(value = "confirm_delete") Integer confirmDelete) {
+    @PostMapping(value = "/delete")
+    public String delete(
+            @RequestParam(value = "task_id") Long taskId,
+            @RequestParam(value = "confirm_delete") Integer confirmDelete
+    ) {
 
         if (confirmDelete != null && confirmDelete == 1) {
-            taskDao.deleteWithItems(task.getTaskId());
-            return "redirect:/t/task/";
+            taskService.deleteTaskWithItems(taskId);
         }
 
-        return "redirect:/t/task/delete?task_id=" + task.getTaskId();
-    }
-
-    @Autowired
-    private TaskValidator taskValidator;
-
-    @InitBinder("task")
-    protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(taskValidator);
+        return "redirect:/task/";
     }
 }

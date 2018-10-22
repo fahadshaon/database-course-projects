@@ -1,24 +1,38 @@
 package edu.utd.dspl.tasks.domain;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-/**
- * @author Fahad Shaon
- */
+@Entity
+@Table(name = "task")
 public class Task {
-    private Integer taskId;
-    private String title;
-    private Date createdAt;
-    private List<Item> itemList;
 
-    public Integer getTaskId() {
-        return taskId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "task_id")
+    private Long id;
+
+    @NotNull
+    @NotEmpty
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "taskId", cascade = CascadeType.ALL)
+    private List<Item> items;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setTaskId(Integer taskId) {
-        this.taskId = taskId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -29,26 +43,27 @@ public class Task {
         this.title = title;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
-    public List<Item> getTodoItemList() {
-        List<Item> todoItems = new ArrayList<Item>();
+    @Transient
+    public List<Item> getTodoItems() {
+        List<Item> todoItems = new ArrayList<>();
 
-        for (Item item : itemList) {
+        for (Item item : items) {
             if (item.isTodo()) {
                 todoItems.add(item);
             }
@@ -57,25 +72,16 @@ public class Task {
         return todoItems;
     }
 
-    public List<Item> getDoneItemList() {
-        List<Item> doneItems = new ArrayList<Item>();
+    @Transient
+    public List<Item> getDoneItems() {
+        List<Item> doneItems = new ArrayList<>();
 
-        for (Item item : itemList) {
+        for (Item item : items) {
             if (item.isDone()) {
                 doneItems.add(item);
             }
         }
 
         return doneItems;
-    }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "taskId=" + taskId +
-                ", title='" + title + '\'' +
-                ", createdAt=" + createdAt +
-                ", itemList=" + itemList +
-                '}';
     }
 }

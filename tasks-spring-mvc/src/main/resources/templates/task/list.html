@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{index.html :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Tasks App - Task List</title>
+</head>
+<body>
+
+<section>
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="mt-2 mb-4 border-bottom">
+                <h3>Tasks List</h3>
+            </div>
+
+            <table class="table table-bordered table-stripped table-sm">
+                <tr>
+                    <th>Title</th>
+                    <th></th>
+                </tr>
+
+                <tr th:each="task : ${tasks}">
+                    <td>
+                        <a href="#" th:href="@{/task/detail(task_id=${task.id})}" th:text="${task.title}">
+                            Title
+                        </a>
+                    </td>
+
+                    <td class="text-center">
+                        <a th:href="@{/task/save(task_id=${task.id})}" href="/task/save"
+                           class="btn btn-secondary btn-sm" role="button">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <a th:href="@{/task/delete(task_id=${task.id})}" href="/task/delete"
+                           class="btn btn-danger btn-sm" role="button">
+                            <i class="fa fa-trash"></i> Delete
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+
+            <div class="text-center">
+                <a th:href="@{/task/save}" href="/task/save" class="btn btn-info">
+                    <i class="fa fa-plus-circle"></i> Add New Task
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
