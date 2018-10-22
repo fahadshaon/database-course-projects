@@ -12,12 +12,8 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    mysqlConnectorVersion = '5.1.32'
-}
-
 dependencies {
-    compile "mysql:mysql-connector-java:${mysqlConnectorVersion}"
+    compile 'mysql:mysql-connector-java:8.0.12'
 }
 
 mainClassName = System.getProperty("mainClass") ?: 'edu.utd.dspl.InitialExample'

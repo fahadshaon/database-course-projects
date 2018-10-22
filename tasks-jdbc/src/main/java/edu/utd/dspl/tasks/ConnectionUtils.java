@@ -13,10 +13,9 @@ public class ConnectionUtils {
 
     public static Connection getConnection() throws SQLException {
 
-
         try {
             Properties properties = new Properties();
-            properties.load(ConnectionUtils.class.getClassLoader().getResourceAsStream("jdbc.properties"));
+            properties.load(ConnectionUtils.class.getClassLoader().getResourceAsStream("application.properties"));
 
             String dbUrl = properties.getProperty("jdbc.url");
             String dbClass = properties.getProperty("jdbc.driverClassName");

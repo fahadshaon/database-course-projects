@@ -13,10 +13,10 @@ public class InitialExample {
 
     public static void main(String[] args) {
 
-        String dbUrl = "jdbc:mysql://localhost/test_db";
-        String dbClass = "com.mysql.jdbc.Driver";
+        String dbUrl = "jdbc:mysql://localhost/test_db?useSSL=false&serverTimezone=America/Chicago";
+        String dbClass = "com.mysql.cj.jdbc.Driver";
         String username = "test_user";
-        String password = "pass1234";
+        String password = "";   // Add the password here
 
         String query = "select * from item";
 

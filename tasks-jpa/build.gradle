@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'edu.utd.dspl'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.hibernate:hibernate-core:5.3.7.Final'
+    compile 'mysql:mysql-connector-java:8.0.12'
+
+    testCompile 'junit:junit:4.12'
+}
+
+mainClassName = System.getProperty("mainClass") ?: 'edu.utd.dspl.tasks.Main'
+
+run {
+    standardInput = System.in
+}

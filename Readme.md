@@ -2,11 +2,13 @@ Code examples for CS6360 Database Design course. It contains following projects
 
 1. **tasks-jdbc**
     - Implements interaction with database using JDBC
-2. **tasks-spring**
+2. **tasks-jpa**
+    - Implements interaction with database using JPA and persistence 
+3. **tasks-spring**
     - Implements interaction with database using JdbcTemplate and usages DAO and Domain objects.
-3. **servlet-jsp-hello-world**
+4. **servlet-jsp-hello-world**
     - Simple servlet and jsp project, demonstrating how to create web application
-4. **tasks-spring-mvc**
+5. **tasks-spring-mvc**
     - Fully functional Spring MVC application for managing tasks and task-items.
 
 Relevant presentation at <http://www.shaon.org/slides/mvc-and-spring.html>
@@ -54,8 +56,9 @@ In fact, sdkman can be used to install Java itself.
 ## Database settings
 
 - For database interacting projects like `tasks-jdbc`, `tasks-spring`, and `tasks-spring-mvc`,
-    copy `src/main/resources/jdbc-sample.properties` to `src/main/resources/jdbc.properties`
-    and fill up the four attributes.
+    copy `src/main/resources/application.properties-sample` to `src/main/resources/application.properties`
+    and fill up the four attributes. Specifically for `tasks-jpa` copy `persistence.xml-sample` to `persistence.xml`
+    and fill the attributes. 
 
 ## Build and Run
 
@@ -105,4 +108,4 @@ In addition, these projects can be directly executed from any modern IDE like In
 Following are the versions of different systems, which are used to build, deploy, and run these projects.
 
 - Java - 1.8
-- Gradle - 2.4.11
+- Gradle - 4.8
