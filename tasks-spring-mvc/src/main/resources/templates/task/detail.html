@@ -1,0 +1,138 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{index.html :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Tasks App - Task Detail</title>
+</head>
+<body>
+
+<section>
+
+    <div class="row" th:if="${ task == null }">
+        <div class="col-md-12">
+
+            <div class="mt-2 mb-4 border-bottom">
+                <h3>Task Detail</h3>
+            </div>
+
+            <div class="alert alert-warning">
+                Task not found.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mt-2 mb-4 border-bottom">
+                <h3 th:text="${task.title}"></h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>TODO</h4>
+
+            <div class="alert alert-warning" th:if="${#lists.isEmpty(task.todoItems)}" role="alert">
+                Nothing in todo list.
+            </div>
+
+            <ul class="list-group">
+
+                <li class="list-group-item" th:each="item : ${task.todoItems}">
+
+                    <div class="d-flex flex-row">
+                        <div class="flex-grow-1" th:text="${item.title}"></div>
+
+                        <div>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                            <form method="post" th:action="@{/task/item/state}" role="form"
+                                  style="display: inline-block !important; margin-bottom: 0 !important">
+
+                                <input type="hidden" name="task_id" th:value="${item.taskId}">
+                                <input type="hidden" name="item_id" th:value="${item.id}">
+                                <input type="hidden" name="new_state" value="1">
+
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fa fa-arrow-right"></i>
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-6">
+            <h4>Done</h4>
+
+            <div class="alert alert-warning" th:if="${#lists.isEmpty(task.doneItems)}">
+                Nothing done yet.
+            </div>
+
+            <ul class="list-group">
+
+                <li class="list-group-item" th:each="item : ${task.doneItems}">
+
+                    <div class="d-flex flex-row">
+                        <div class="flex-grow-1 done-item" th:text="${item.title}"></div>
+
+                        <div>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-secondary">
+                                <i class="fa fa-trash"></i>
+                            </a>
+
+                            <form method="post" th:action="@{/task/item/state}" role="form"
+                                  style="display: inline-block !important;margin-bottom: 0 !important">
+
+                                <input type="hidden" name="task_id" th:value="${item.taskId}">
+                                <input type="hidden" name="item_id" th:value="${item.id}">
+
+                                <input type="hidden" name="new_state" value="0">
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fa fa-arrow-left"></i>
+                                </button>
+                            </form>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6 offset-md-3 text-center">
+
+            <form class="form-inline" method="post" th:action="@{/task/item/save}" th:object="${item}" role="form">
+
+                <label class="sr-only" for="title">Title</label>
+                <input placeholder="Item Title" id="title" type="text" th:field="*{title}"
+                       class="form-control mb-2 mr-sm-2">
+
+                <ul th:if="${#fields.hasErrors('title')}">
+                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                </ul>
+
+                <button type="submit" class="btn btn-info mb-2">
+                    <i class="fa fa-plus-circle"></i> Add Item
+                </button>
+
+                <input type="hidden" name="task_id" th:value="${task.id}">
+            </form>
+
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

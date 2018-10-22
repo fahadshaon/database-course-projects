@@ -1,24 +1,41 @@
 package edu.utd.dspl.tasks.domain;
 
-/**
- * @author Fahad Shaon
- */
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Entity
+@Table(name = "item")
 public class Item {
 
     public static final int ITEM_TYPE_TODO = 0;
     public static final int ITEM_TYPE_DONE = 1;
-    private int itemId;
-    private String title;
-    private int itemType;
-    private int order;
-    private int taskId;
 
-    public int getItemId() {
-        return itemId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "item_id")
+    private Long id;
+
+    @NotNull
+    @NotEmpty
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "item_type")
+    private Integer itemType;
+
+    @Column(name = "`order`")
+    private Integer order;
+
+    @Column(name = "task_id")
+    private Long taskId;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -29,27 +46,27 @@ public class Item {
         this.title = title;
     }
 
-    public int getItemType() {
+    public Integer getItemType() {
         return itemType;
     }
 
-    public void setItemType(int itemType) {
+    public void setItemType(Integer itemType) {
         this.itemType = itemType;
     }
 
-    public int getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(Integer order) {
         this.order = order;
     }
 
-    public int getTaskId() {
+    public Long getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(int taskId) {
+    public void setTaskId(Long taskId) {
         this.taskId = taskId;
     }
 
@@ -59,16 +76,5 @@ public class Item {
 
     public boolean isDone() {
         return this.itemType == ITEM_TYPE_DONE;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "itemId=" + itemId +
-                ", title='" + title + '\'' +
-                ", itemType=" + itemType +
-                ", order=" + order +
-                ", taskId=" + taskId +
-                '}';
     }
 }
