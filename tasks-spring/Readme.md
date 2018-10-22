@@ -4,7 +4,7 @@ An example spring application managing tasks done for CS6360: Database Design cl
 
 ## Run
 
-First make a copy of `src/main/resources/jdbc-sample.properties` to `src/main/resources/jdbc.properties`
+First make a copy of `src/main/resources/application.properties-sample` to `src/main/resources/application.properties`
 and fill up the four attributes. Then,
 
 To build
